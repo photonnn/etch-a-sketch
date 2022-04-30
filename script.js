@@ -9,7 +9,7 @@ function createDiv(a) {
 }
 
 function fill(a) {
-    let number = a*a;
+    let number = a * a;
 
     while (number != 0) {
         createDiv(a);
@@ -17,10 +17,18 @@ function fill(a) {
     }
 }
 
-setTimeout(() => {
+function makeBlack() {
+    this.style.backgroundColor = "black";
+}
+
+function init() {
     console.log(container.offsetWidth);
     fill(16);
-}, 1);
+    const divs = document.querySelectorAll(".in-div");
+    divs.forEach(div => {
+        div.addEventListener('mousemove', makeBlack);
+    });
+}
 
 const container = document.querySelector(".container");
-
+init();
