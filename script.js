@@ -1,7 +1,13 @@
+let color;
+const container = document.querySelector(".container");
+const btn = document.querySelector("button");
+btn.addEventListener('click', init);
+
+
 function removeChildren() {
-    // faster to remove last one
     while (container.firstChild) {
-        container.removeChild(container.lastChild);
+        // faster to remove last one
+        container.removeChild(container.lastChild); 
     }
 }
 
@@ -16,27 +22,59 @@ function fillContainer(a) {
         div.classList.add("in-div");
         div.style.height = `${height}px`;
         div.style.width = `${width}px`;
+        div.counter = 1;
         container.appendChild(div);
         number--
     }
 }
 
-function changeColor() {
-    this.style.backgroundColor = "black";
+// counter for alpha, each div has its own - necessary to reset it when its
+// color changes
+function applyColor() {
+    switch (color) {
+        case "Black":
+            this.counter = 1;
+            this.style.backgroundColor = "Black";
+            break;
+        case "Erase":
+            this.counter = 1;
+            this.style.backgroundColor = "White";
+            break;
+        case "Rainbow":
+            this.counter = 1;
+            this.style.backgroundColor = `rgb(${randomNumber()}, 
+                ${randomNumber()}, ${randomNumber()})`;
+            break;
+        case "Shade":
+            this.style.backgroundColor = `rgba(0, 0, 0, ${0.1 * this.counter})`;
+            this.counter++;
+            break;
+        default:
+            this.style.backgroundColor = "Black";
+    }
 }
 
-function listen() {
+function listenForColorChange() {
+    const btns = document.querySelectorAll(".btn");
+    console.log(btns);
+    btns.forEach(btn =>
+        btn.addEventListener('click', () => color = btn.textContent)
+    );
+}
+
+// used for rainbow color
+function randomNumber() {
+    return Math.floor(Math.random() * 256) + 1;
+}
+
+function listenForHover() {
     const divs = document.querySelectorAll(".in-div");
-        const divsArray = Array.from(divs);
-        for (const div of divsArray) {
-            div.addEventListener('mouseenter', changeColor);
-        }
+    const divsArray = Array.from(divs);
+    for (const div of divsArray) {
+        div.addEventListener('mouseenter', applyColor);
+
+    }
 }
-
-
-const container = document.querySelector(".container");
-const btn = document.querySelector("button");
-btn.addEventListener('click', init);
 
 function init() {
     let answer = prompt("How many squares do you want?");
@@ -45,6 +83,7 @@ function init() {
     } else {
         removeChildren();
         fillContainer(answer);
-        listen();
+        listenForHover();
+        listenForColorChange();
     }
 }
