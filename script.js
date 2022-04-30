@@ -17,40 +17,47 @@ function fillContainer(a) {
     const height = container.offsetHeight / a;
     const width = container.offsetWidth / a;
 
-    while (number != 0) {
+    while (number !== 0) {
         const div = document.createElement("div");
         div.classList.add("in-div");
         div.style.height = `${height}px`;
         div.style.width = `${width}px`;
-        div.c_o_u_n_t_e_r = 1;
         container.appendChild(div);
         number--;
     }
 }
 
-// counter for alpha, each div has its own - necessary to reset it when its
-// color changes
+// The reason I did it this way is because opacity seemed simpler than rgba to
+// me, I did not want to use global variables nor costum properties such as a 
+// costum counter for this kind of a problem. 
+// This was the best solution that I've come up with as of now, might change
+// when I become more knowledgeble.
 function applyColor() {
     const chosenButton = document.querySelector(".chosen");
     switch (chosenButton.textContent) {
         case "Black":
-            this.c_o_u_n_t_e_r = 1;
+            this.style.opacity = "1";
             this.style.backgroundColor = "Black";
             break;
         case "Erase":
-            this.c_o_u_n_t_e_r = 1;
+            this.style.opacity = "1";
             this.style.backgroundColor = "White";
             break;
         case "Rainbow":
-            this.c_o_u_n_t_e_r = 1;
+            this.style.opacity = "1";
             this.style.backgroundColor = `rgb(${randomNumber()}, 
                 ${randomNumber()}, ${randomNumber()})`;
             break;
         case "Shade":
-            this.style.backgroundColor = `rgba(0, 0, 0, ${0.1 * 
-                this.c_o_u_n_t_e_r})`;
-            this.c_o_u_n_t_e_r++;
-            break;
+            if (this.style.opacity !== "1") {
+                this.style.opacity = (+this.style.opacity + 0.1).toString();
+                if (this.style.opacity >= "1") {
+                    this.style.opacity = "0.99";
+                }
+            } else {
+                this.style.backgroundColor = "Black";
+                this.style.opacity = "0.1";
+            }
         default:
             this.style.backgroundColor = "Black";
     } 
