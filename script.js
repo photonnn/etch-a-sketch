@@ -90,13 +90,13 @@ function listenForHover() {
 }
 
 function init() {
-    let answer = prompt("How many squares do you want?");
-    if (answer > 100) {
-        alert("ERROR TOO MANY SQUARES");
-    } else {
+    let answer = Math.round(prompt("How many squares do you want??"));
+    if (Math.round(answer) > 0 && Math.round(answer) < 101) {
         removeChildren();
         fillContainer(answer);
         listenForHover();
         listenForColorChange();
+    } else {
+        alert("ERROR");
     }
 }
