@@ -1,12 +1,12 @@
 let color;
 const container = document.querySelector(".container");
-const btn = document.querySelector("button");
-btn.addEventListener('click', init);
+const play_btn = document.querySelector("button");
+play_btn.addEventListener('click', init);
 
 
 function removeChildren() {
     while (container.firstChild) {
-        // faster to remove last one
+        /* In CS, in general, faster to remove lastChild, depending ofc ...*/
         container.removeChild(container.lastChild); 
     }
 }
