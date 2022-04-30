@@ -13,7 +13,13 @@ body {
 }
 .container {
     background-color: whitesmoke;
-    border: coral 10px solid;
-    width: 600px;
-    height: 600px;
+    outline: coral 10px solid; 
+    width: 550px;
+    height: 550px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.in-div {
+    background-color: red;
 }
