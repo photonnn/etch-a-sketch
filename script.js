@@ -1,34 +1,50 @@
-function createDiv(a) {
-    let height = container.offsetHeight / a;
-    let width = container.offsetWidth / a;
-    const div = document.createElement("div");
-    div.classList.add("in-div");
-    div.style.height = `${height}px`;
-    div.style.width = `${width}px`;
-    container.appendChild(div);
+function removeChildren() {
+    // faster to remove last one
+    while (container.firstChild) {
+        container.removeChild(container.lastChild);
+    }
 }
 
-function fill(a) {
+function fillContainer(a) {
     let number = a * a;
 
+    const height = container.offsetHeight / a;
+    const width = container.offsetWidth / a;
+
     while (number != 0) {
-        createDiv(a);
+        const div = document.createElement("div");
+        div.classList.add("in-div");
+        div.style.height = `${height}px`;
+        div.style.width = `${width}px`;
+        container.appendChild(div);
         number--
     }
 }
 
-function makeBlack() {
+function changeColor() {
     this.style.backgroundColor = "black";
 }
 
-function init() {
-    console.log(container.offsetWidth);
-    fill(16);
+function listen() {
     const divs = document.querySelectorAll(".in-div");
-    divs.forEach(div => {
-        div.addEventListener('mousemove', makeBlack);
-    });
+        const divsArray = Array.from(divs);
+        for (const div of divsArray) {
+            div.addEventListener('mouseenter', changeColor);
+        }
 }
 
+
 const container = document.querySelector(".container");
-init();
+const btn = document.querySelector("button");
+btn.addEventListener('click', init);
+
+function init() {
+    let answer = prompt("How many squares do you want?");
+    if (answer > 100) {
+        alert("ERROR TOO MANY SQUARES");
+    } else {
+        removeChildren();
+        fillContainer(answer);
+        listen();
+    }
+}
