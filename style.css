@@ -14,8 +14,8 @@ body {
 }
 .container {
     outline: coral 10px solid; 
-    width: 65vh;
-    height: 65vh;
+    width: 500px;
+    height: 500px;
     display: flex;
     flex-wrap: wrap;
 }
