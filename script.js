@@ -77,7 +77,7 @@ function listenForColorChange() {
 
 // used for rainbow color
 function randomNumber() {
-    return Math.floor(Math.random() * 256);
+    return Math.floor(Math.random() * 256)+1;
 }
 
 function listenForHover() {
