@@ -3,6 +3,10 @@
     margin: 0;
     border: 0; 
 }
+:root {
+    --size: 1;
+}
+
 html, body {
     height: 100%;
 }
@@ -16,8 +20,9 @@ body {
     outline: coral 10px solid; 
     width: 500px;
     height: 500px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(var(--size), 1fr);
+    grid-template-rows: repeat(var(--size), 1fr);
 }
 
 button {

@@ -12,16 +12,13 @@ function removeChildren() {
 
 function fillContainer(a) {
     let number = a * a;
-
+    const r = document.querySelector(':root');
     const container = document.querySelector(".container");
-    const height = container.offsetHeight / a;
-    const width = container.offsetWidth / a;
+    r.style.setProperty("--size", `${a}`);
 
     while (number !== 0) {
         const div = document.createElement("div");
         div.classList.add("in-div");
-        div.style.height = `${height}px`;
-        div.style.width = `${width}px`;
         container.appendChild(div);
         number--;
     }
